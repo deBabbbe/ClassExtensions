@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>CsUnitTestHelper</PackageId>
+    <Version>0.0.1</Version>
+    <Authors>deBabbe</Authors>
+    <Company></Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
