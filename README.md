@@ -14,7 +14,7 @@ Returns true, if the passed object is null, otherwise false
 
 Returns true, if the passed object is not null, otherwise false
 
-### ForAll()
+### ForAll(Action<T> action)
 
 Executes action for each element. No exception, if enumeration or action is null
 
