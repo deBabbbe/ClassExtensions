@@ -2,7 +2,7 @@ using ClassExtensions;
 
 namespace ClassExtensionsTest;
 
-public class ObjectExtensionsTest
+public class ExtensionsTest
 {
     private static object[] _isNullCases =
     {
@@ -21,6 +21,15 @@ public class ObjectExtensionsTest
         DateTime.MinValue,
         Guid.Empty
     };
+
+    [Test]
+    [TestCase("ABCDEF")]
+    [TestCase("Abcdef")]
+    [TestCase("aBcDeF")]
+    public void ToRandomCaseTest(string text)
+    {
+        Assert.AreNotEqual(text.ToRandomCase(), text.ToRandomCase());
+    }
 
     [Test]
     [TestCaseSource(nameof(_isNullCases))]
