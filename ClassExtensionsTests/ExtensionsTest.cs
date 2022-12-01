@@ -154,4 +154,13 @@ public class ExtensionsTest
         StringAssert.Contains(expected, exception.Message);
     }
 
+    [Test]
+    [TestCase("Os")]
+    [TestCase("Username")]
+    [TestCase("Temp")]
+    public void ExpandEnvTest(string name)
+    {
+        Assert.AreEqual(name.ExpandEnv(), Environment.ExpandEnvironmentVariables(name));
+    }
+
 }

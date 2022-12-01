@@ -25,3 +25,7 @@ Executes action n times. No exception, if action is null
 ### EqualJsonCheck(object toCompare)
 
 Compares two objects by serializing them to json string
+
+## ExpEnv(string name)
+
+Shortcut for Environment.ExpandEnvironmentVariables

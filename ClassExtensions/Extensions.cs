@@ -45,4 +45,7 @@ public static class Extensions
             throw new Exception(message);
         }
     }
+
+    public static string ExpandEnv(this string name) =>
+        Environment.ExpandEnvironmentVariables(name);
 }
