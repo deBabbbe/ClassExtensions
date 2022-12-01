@@ -2,7 +2,7 @@ using ClassExtensions;
 
 namespace ClassExtensionsTest;
 
-public class ClassExtensionsTest
+public class StringExtensionsTest
 {
     [SetUp]
     public void Setup()
