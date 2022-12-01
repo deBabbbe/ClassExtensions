@@ -10,7 +10,11 @@ public class ClassExtensionsTest
     }
 
     [Test]
-    public void Test()
+    [TestCase("ABCDEF")]
+    [TestCase("Abcdef")]
+    [TestCase("aBcDeF")]
+    public void ToRandomCaseTest(string text)
     {
+        Assert.AreNotEqual(text.ToRandomCase(), text.ToRandomCase());
     }
 }

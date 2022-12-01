@@ -3,3 +3,7 @@
 # Extensions for C# classes
 
 ## StringExtensions
+
+### string ToRandomCase(string text)
+
+Returns the passed string in random case
