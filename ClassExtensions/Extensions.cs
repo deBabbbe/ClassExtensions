@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace ClassExtensions;
 
 public static class Extensions
@@ -29,8 +31,18 @@ public static class Extensions
         }
     }
 
-    public static void Times(this int count, Action<int> action)
-    {
+    public static void Times(this int count, Action<int> action) =>
         Enumerable.Range(0, count).ForAll(action);
+
+    public static void EqualJsonCheck<T>(this T self, T toCompare)
+    {
+        var a = JsonSerializer.Serialize(self);
+        var b = JsonSerializer.Serialize(toCompare);
+        if (a != b)
+        {
+            var message = $"{a} not equal to {b}";
+            Console.WriteLine(message);
+            throw new Exception(message);
+        }
     }
 }

@@ -2,13 +2,9 @@
 
 # Extensions for C# classes
 
-## StringExtensions
-
 ### string ToRandomCase(string text)
 
 Returns the passed string in random case
-
-## ObjectExtensions
 
 ### IsNull()
 
@@ -25,3 +21,7 @@ Executes action for each element. No exception, if enumeration or action is null
 ### Times(int count, Action<int> action)
 
 Executes action n times. No exception, if action is null
+
+### EqualJsonCheck(object toCompare)
+
+Compares two objects by serializing them to json string
