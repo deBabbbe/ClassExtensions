@@ -10,14 +10,18 @@ Returns the passed string in random case
 
 ## ObjectExtensions
 
-### IsNull
+### IsNull()
 
 Returns true, if the passed object is null, otherwise false
 
-### IsNotNull
+### IsNotNull()
 
 Returns true, if the passed object is not null, otherwise false
 
-### ForAll
+### ForAll()
 
-Executes action for each element. No exception, if enumeration or action is empty
+Executes action for each element. No exception, if enumeration or action is null
+
+### Times(int count, Action<int> action)
+
+Executes action n times. No exception, if action is null

@@ -17,4 +17,9 @@ public static class ObjectExtensions
             action(entry);
         }
     }
+
+    public static void Times(this int count, Action<int> action)
+    {
+        Enumerable.Range(0, count).ForAll(action);
+    }
 }

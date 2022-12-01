@@ -62,6 +62,18 @@ public class ObjectExtensionsTest
     }
 
     [Test]
+    public void ForAllTest_DifferentType()
+    {
+        var list = new List<int> { 1, 2, 3, 4, 5 };
+        var expectedString = "!1!!2!!3!!4!!5!";
+        var stringToCheck = "";
+        list.ForAll(entry => stringToCheck += $"!{entry}!");
+
+        Assert.AreEqual(expectedString, stringToCheck);
+    }
+
+
+    [Test]
     public void ForAllTest_EnumerationNull_NoException()
     {
         IEnumerable<object> list = null!;
@@ -73,5 +85,22 @@ public class ObjectExtensionsTest
     {
         var list = new List<string> { "A", "b", "C", "d" };
         Assert.DoesNotThrow(() => list.ForAll(null!));
+    }
+
+    [Test]
+    public void TimesTest()
+    {
+        var resultString = "";
+        var expectedString = "0,1,2,3,4,5,6,7,8,9,";
+
+        10.Times(t => resultString += $"{t},");
+
+        Assert.AreEqual(expectedString, resultString);
+    }
+
+    [Test]
+    public void TimesTest_ActionNull_DoesNotThrowException()
+    {
+        Assert.DoesNotThrow(() => 10.Times(null!));
     }
 }
