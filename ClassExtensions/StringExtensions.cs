@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace TestHelper;
+namespace ClassExtensions;
 
 public static class Helper
 {

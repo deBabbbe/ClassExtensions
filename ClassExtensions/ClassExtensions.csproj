@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>CsUnitTestHelper</PackageId>
+    <PackageId>ClassExtensions</PackageId>
     <Version>0.0.1</Version>
     <Authors>deBabbe</Authors>
     <Company></Company>
