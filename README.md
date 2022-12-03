@@ -2,10 +2,6 @@
 
 # Extensions for C# classes
 
-### string ToRandomCase(this string text)
-
-Returns the passed string in random case
-
 ### IsNull(this object)
 
 Returns true, if the passed object is null, otherwise false

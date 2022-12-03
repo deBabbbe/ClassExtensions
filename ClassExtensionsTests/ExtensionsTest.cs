@@ -50,15 +50,6 @@ public class ExtensionsTest
     };
 
     [Test]
-    [TestCase("ABCDEF")]
-    [TestCase("Abcdef")]
-    [TestCase("aBcDeF")]
-    public void ToRandomCaseTest(string text)
-    {
-        Assert.AreNotEqual(text.ToRandomCase(), text.ToRandomCase());
-    }
-
-    [Test]
     [TestCaseSource(nameof(_nullCases))]
     public void IsNullTest_ReturnsTrue(object @object)
     {
