@@ -21,14 +21,20 @@ public static class Extensions
 
     public static void EqualJsonCheck<T>(this T self, T toCompare)
     {
-        var a = JsonSerializer.Serialize(self);
-        var b = JsonSerializer.Serialize(toCompare);
+        var (a, b) = ConvertToJson(self, toCompare);
+
         if (a != b)
         {
             var message = $"{a} not equal to {b}";
             Console.WriteLine(message);
             throw new Exception(message);
         }
+    }
+
+    public static bool IsEqualJson<T>(this T self, T toCompare)
+    {
+        var (a, b) = ConvertToJson(self, toCompare);
+        return a == b;
     }
 
     public static string ExpandEnv(this string name) =>
@@ -44,4 +50,11 @@ public static class Extensions
 
     public static bool IsNotNullOrEmpty(this IEnumerable value) =>
         !value.IsNullOrEmpty();
+
+    private static (string self, string toCompare) ConvertToJson<T>(T self, T toCompare)
+    {
+        var a = JsonSerializer.Serialize(self);
+        var b = JsonSerializer.Serialize(toCompare);
+        return (a, b);
+    }
 }

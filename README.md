@@ -20,7 +20,11 @@ Executes action n times. No exception, if action is null
 
 ### EqualJsonCheck(this object, object toCompare)
 
-Compares two objects by serializing them to json string
+Compares two objects by serializing them to json string and throws exception if not
+
+### bool IsEqualJson(this object, object toCompare)
+
+Compares two objects by serializing them to json string and returns bool
 
 ### ExpEnv(this string)
 

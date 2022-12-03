@@ -172,6 +172,42 @@ public class ExtensionsTest
     }
 
     [Test]
+    public void IsEqualJsonTest_ReturnsTrue()
+    {
+        var a = new { Amount = 108, Message = "Hello" };
+        var b = new { Amount = 108, Message = "Hello" };
+
+        Assert.IsTrue(a.IsEqualJson(b), "Objects are not equal");
+    }
+
+    [Test]
+    public void IsEqualJsonTest_ReturnsTrue_DifferentType()
+    {
+        var a = DateTime.MaxValue;
+        var b = DateTime.MaxValue;
+
+        Assert.IsTrue(a.IsEqualJson(b), "Objects are not equal");
+    }
+
+    [Test]
+    public void IsEqualJsonTest_ReturnsFalse()
+    {
+        var a = new { Amount = 108, Message = "Hella" };
+        var b = new { Amount = 108, Message = "Hello" };
+
+        Assert.IsFalse(a.IsEqualJson(b), "Objects are equal");
+    }
+
+    [Test]
+    public void IsEqualJsonTest_ReturnsFalse_DifferentType()
+    {
+        var a = DateTime.MaxValue;
+        var b = DateTime.MinValue;
+
+        Assert.IsFalse(a.IsEqualJson(b), "Objects are equal");
+    }
+
+    [Test]
     [TestCase("Os")]
     [TestCase("Username")]
     [TestCase("Temp")]
