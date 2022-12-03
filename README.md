@@ -30,18 +30,18 @@ Compares two objects by serializing them to json string
 
 Shortcut for Environment.ExpandEnvironmentVariables
 
-### IsEmpty(this string)
+### IsEmpty(this IEnumerable value)
 
-Checks if a string is empty
+Checks if a IEnumerable is empty
 
-### IsNotEmpty(this string)
+### IsNotEmpty(this IEnumerable value)
 
-Checks if a string is not empty
+Checks if a IEnumerable is not empty
 
-### IsNullOrEmpty(this string)
+### IsNullOrEmpty(this IEnumerable value)
 
-Checks if a string is null or empty
+Checks if a IEnumerable is null or empty
 
-### IsNotNullOrEmpty(this string)
+### IsNotNullOrEmpty(this IEnumerable value)
 
-Checks if a string is not null or empty
+Checks if a IEnumerable is not null or empty

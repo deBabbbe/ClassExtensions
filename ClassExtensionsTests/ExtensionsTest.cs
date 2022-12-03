@@ -1,3 +1,4 @@
+using System.Collections;
 using ClassExtensions;
 using TestHelper;
 
@@ -5,7 +6,7 @@ namespace ClassExtensionsTest;
 
 public class ExtensionsTest
 {
-    private static object[] _isNullCases =
+    private static object[] _nullCases =
     {
         null!,
         (null as string)!,
@@ -14,13 +15,38 @@ public class ExtensionsTest
         (null as int?)!
     };
 
-    private static object[] _isNotNullCases =
+    private static object[] _notNullCases =
     {
-        123,
-        "ABC",
-        true,
-        DateTime.MinValue,
-        Guid.Empty
+        Helper.GenerateRandomInt(),
+        Helper.GenerateRandomString(),
+        Helper.GenerateRandomBool(),
+        Helper.GetGenerateRandomDateTime(),
+        Guid.NewGuid()
+    };
+
+    private static object[] _nullOrEmptyValues =
+    {
+        null!,
+        (null as string)!,
+        (null as bool?)!,
+        (null as DateTime?)!,
+        (null as int?)!,
+        new List<string>(),
+        new int[]{},
+        new List<bool>(),
+    };
+
+    private static object[] _emptyValues =
+    {
+        new List<string>(),
+        new int[]{},
+        new List<bool>(),
+    };
+
+    private static object[] _notNullOrEmptyValues =
+    {
+        Helper.GenerateRandomString(),
+        Enumerable.Range(1,5)
     };
 
     [Test]
@@ -33,28 +59,28 @@ public class ExtensionsTest
     }
 
     [Test]
-    [TestCaseSource(nameof(_isNullCases))]
+    [TestCaseSource(nameof(_nullCases))]
     public void IsNullTest_ReturnsTrue(object @object)
     {
         Assert.IsTrue(@object.IsNull(), $"{@object} was not null");
     }
 
     [Test]
-    [TestCaseSource(nameof(_isNotNullCases))]
+    [TestCaseSource(nameof(_notNullCases))]
     public void IsNullTest_ReturnsFalse(object @object)
     {
         Assert.IsFalse(@object.IsNull(), $"{@object} was null");
     }
 
     [Test]
-    [TestCaseSource(nameof(_isNotNullCases))]
+    [TestCaseSource(nameof(_notNullCases))]
     public void IsNotNullTest_ReturnsTrue(object @object)
     {
         Assert.IsTrue(@object.IsNotNull(), $"{@object} was null");
     }
 
     [Test]
-    [TestCaseSource(nameof(_isNullCases))]
+    [TestCaseSource(nameof(_nullCases))]
     public void IsNotNullTest_ReturnsFalse(object @object)
     {
         Assert.IsFalse(@object.IsNotNull(), $"{@object} was not null");
@@ -164,59 +190,61 @@ public class ExtensionsTest
     }
 
     [Test]
-    public void IsEmptyTest_ReturnsTrue()
+    [TestCaseSource(nameof(_emptyValues))]
+    public void IsEmptyTest_ReturnsTrue(IEnumerable values)
     {
-        Assert.IsTrue("".IsEmpty(), "'' was not empty");
+        Assert.IsTrue(values.IsEmpty(), "'' was not empty");
     }
 
     [Test]
-    public void IsEmptyTest_ReturnsFalse()
+    [TestCaseSource(nameof(_notNullOrEmptyValues))]
+    public void IsEmptyTest_ReturnsFalse(IEnumerable values)
     {
-        var text = Helper.GenerateRandomString();
-        Assert.IsFalse(text.IsEmpty(), $"'{text}' was not empty");
+        Assert.IsFalse(values.IsEmpty(), $"'{values}' was not empty");
     }
 
     [Test]
-    public void IsNotEmptyTest_ReturnsTrue()
+    [TestCaseSource(nameof(_nullOrEmptyValues))]
+    public void IsNotEmptyTest_ReturnsFalse(IEnumerable values)
     {
         Assert.IsFalse("".IsNotEmpty(), "'' was not empty");
     }
 
     [Test]
-    public void IsNotEmptyTest_ReturnsFalse()
+    [TestCaseSource(nameof(_notNullOrEmptyValues))]
+    public void IsNotEmptyTest_ReturnsTrue(IEnumerable values)
     {
-        var text = Helper.GenerateRandomString();
-        Assert.IsTrue(text.IsNotEmpty(), $"'{text}' was not empty");
+        Assert.IsTrue(values.IsNotEmpty(), $"'{values}' was not empty");
     }
 
     [Test]
-    [TestCase(null)]
-    [TestCase("")]
-    public void IsNullOrEmptyTest_ReturnsTrue(string value)
+    [TestCaseSource(nameof(_nullOrEmptyValues))]
+    public void IsNullOrEmptyTest_ReturnsTrue(IEnumerable values)
     {
-        Assert.IsTrue(value.IsNullOrEmpty(), $"'{value}' was not null or empty");
+        Assert.IsTrue(values.IsNullOrEmpty(), $"'{values}' was not null or empty");
     }
 
     [Test]
-    public void IsNullOrEmptyTest_ReturnsFalse()
+    [TestCaseSource(nameof(_notNullOrEmptyValues))]
+
+    public void IsNullOrEmptyTest_ReturnsFalse(IEnumerable values)
     {
-        var text = Helper.GenerateRandomString();
-        Assert.IsFalse(text.IsNullOrEmpty(), "'{text}' was null or empty");
+        Assert.IsFalse(values.IsNullOrEmpty(), $"'{values}' was null or empty");
     }
 
     [Test]
-    [TestCase(null)]
-    [TestCase("")]
-    public void IsNotNullOrEmptyTest_ReturnsTrue(string value)
+    [TestCaseSource(nameof(_nullOrEmptyValues))]
+
+    public void IsNotNullOrEmptyTest_ReturnsTrue(IEnumerable values)
     {
-        Assert.IsFalse(value.IsNotNullOrEmpty(), $"'{value}' was null or empty");
+        Assert.IsFalse(values.IsNotNullOrEmpty(), $"'{values}' was null or empty");
     }
 
     [Test]
-    public void IsNotNullOrEmptyTest_ReturnsFalse()
+    [TestCaseSource(nameof(_notNullOrEmptyValues))]
+    public void IsNotNullOrEmptyTest_ReturnsFalse(IEnumerable values)
     {
         var text = Helper.GenerateRandomString();
         Assert.IsTrue(text.IsNotNullOrEmpty(), "'{text}' was not null or empty");
     }
-
 }

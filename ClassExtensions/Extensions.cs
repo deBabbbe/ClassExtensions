@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Collections;
 
 namespace ClassExtensions;
 
@@ -49,11 +50,14 @@ public static class Extensions
     public static string ExpandEnv(this string name) =>
         Environment.ExpandEnvironmentVariables(name);
 
-    public static bool IsEmpty(this string text) => text.Length == 0;
+    public static bool IsEmpty(this IEnumerable value) =>
+        value.Cast<object>().Count() == 0;
 
-    public static bool IsNotEmpty(this string text) => !text.IsEmpty();
+    public static bool IsNotEmpty(this IEnumerable value) => !value.IsEmpty();
 
-    public static bool IsNullOrEmpty(this string text) => string.IsNullOrEmpty(text);
+    public static bool IsNullOrEmpty(this IEnumerable value) =>
+        value.IsNull() || value.IsEmpty();
 
-    public static bool IsNotNullOrEmpty(this string text) => !string.IsNullOrEmpty(text);
+    public static bool IsNotNullOrEmpty(this IEnumerable value) =>
+        !value.IsNullOrEmpty();
 }
