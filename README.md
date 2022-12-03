@@ -1,4 +1,4 @@
-[![.NET Core Desktop](https://github.com/deBabbbe/CsUnitTestHelper/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/deBabbbe/CsUnitTestHelper/actions/workflows/dotnet-desktop.yml)
+[![.NET Core Desktop](https://github.com/deBabbbe/ClassExtensions/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/deBabbbe/ClassExtensions/actions/workflows/dotnet-desktop.yml)
 
 # Extensions for C# classes
 
@@ -26,6 +26,6 @@ Executes action n times. No exception, if action is null
 
 Compares two objects by serializing them to json string
 
-## ExpEnv(string name)
+### ExpEnv(string name)
 
 Shortcut for Environment.ExpandEnvironmentVariables
