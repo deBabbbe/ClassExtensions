@@ -49,8 +49,7 @@ public static class Extensions
     public static string ExpandEnv(this string name) =>
         Environment.ExpandEnvironmentVariables(name);
 
-    public static bool IsEmpty(this string text) =>
-        text.Length == 0;
+    public static bool IsEmpty(this string text) => text.Length == 0;
 
     public static bool IsNotEmpty(this string text) => !text.IsEmpty();
 

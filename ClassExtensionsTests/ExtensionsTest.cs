@@ -82,7 +82,6 @@ public class ExtensionsTest
         Assert.AreEqual(expectedString, stringToCheck);
     }
 
-
     [Test]
     public void ForAllTest_EnumerationNull_NoException()
     {
@@ -140,7 +139,7 @@ public class ExtensionsTest
         var expected = @"{""Amount"":108,""Message"":""Hella""} not equal to {""Amount"":108,""Message"":""Hello""}";
 
         var exception = Assert.Throws<Exception>(() => a.EqualJsonCheck(b));
-        StringAssert.Contains(expected, exception.Message);
+        StringAssert.Contains(expected, exception!.Message);
     }
 
     [Test]
@@ -152,7 +151,7 @@ public class ExtensionsTest
         var expected = @"""9999-12-31T23:59:59.9999999"" not equal to ""0001-01-01T00:00:00""";
 
         var exception = Assert.Throws<Exception>(() => a.EqualJsonCheck(b));
-        StringAssert.Contains(expected, exception.Message);
+        StringAssert.Contains(expected, exception!.Message);
     }
 
     [Test]
