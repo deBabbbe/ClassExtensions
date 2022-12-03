@@ -26,6 +26,22 @@ Executes action n times. No exception, if action is null
 
 Compares two objects by serializing them to json string
 
-### ExpEnv(string name)
+### ExpEnv()
 
 Shortcut for Environment.ExpandEnvironmentVariables
+
+### IsEmpty()
+
+Checks if a string is empty
+
+### IsNotEmpty()
+
+Checks if a string is not empty
+
+### IsNullOrEmpty()
+
+Checks if a string is null or empty
+
+### IsNotNullOrEmpty()
+
+Checks if a string is not null or empty

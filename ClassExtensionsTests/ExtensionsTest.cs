@@ -1,4 +1,5 @@
 using ClassExtensions;
+using TestHelper;
 
 namespace ClassExtensionsTest;
 
@@ -161,6 +162,62 @@ public class ExtensionsTest
     public void ExpandEnvTest(string name)
     {
         Assert.AreEqual(name.ExpandEnv(), Environment.ExpandEnvironmentVariables(name));
+    }
+
+    [Test]
+    public void IsEmptyTest_ReturnsTrue()
+    {
+        Assert.IsTrue("".IsEmpty(), "'' was not empty");
+    }
+
+    [Test]
+    public void IsEmptyTest_ReturnsFalse()
+    {
+        var text = Helper.GenerateRandomString();
+        Assert.IsFalse(text.IsEmpty(), $"'{text}' was not empty");
+    }
+
+    [Test]
+    public void IsNotEmptyTest_ReturnsTrue()
+    {
+        Assert.IsFalse("".IsNotEmpty(), "'' was not empty");
+    }
+
+    [Test]
+    public void IsNotEmptyTest_ReturnsFalse()
+    {
+        var text = Helper.GenerateRandomString();
+        Assert.IsTrue(text.IsNotEmpty(), $"'{text}' was not empty");
+    }
+
+    [Test]
+    [TestCase(null)]
+    [TestCase("")]
+    public void IsNullOrEmptyTest_ReturnsTrue(string value)
+    {
+        Assert.IsTrue(value.IsNullOrEmpty(), $"'{value}' was not null or empty");
+    }
+
+    [Test]
+    public void IsNullOrEmptyTest_ReturnsFalse()
+    {
+        var text = Helper.GenerateRandomString();
+        Assert.IsFalse(text.IsNullOrEmpty(), "'{text}' was null or empty");
+    }
+
+    [Test]
+    [TestCase(null)]
+    [TestCase("")]
+    public void IsNotNullOrEmptyTest_ReturnsTrue(string value)
+    {
+        Assert.IsFalse(value.IsNotNullOrEmpty(), $"'{value}' was null or empty");
+    }
+
+    [Test]
+    public void IsNotNullOrEmptyTest_ReturnsFalse()
+    {
+        var text = Helper.GenerateRandomString();
+        Assert.IsTrue(text.IsNotNullOrEmpty(), "'{text}' was not null or empty");
     }
 
 }
