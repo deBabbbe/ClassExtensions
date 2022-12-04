@@ -4,23 +4,23 @@
 
 # Extensions for C# classes
 
-### IsNull(this object)
+### bool IsNull(this object)
 
 Returns true, if the passed object is null, otherwise false
 
-### IsNotNull(this object)
+### bool IsNotNull(this object)
 
 Returns true, if the passed object is not null, otherwise false
 
-### ForAll(this IEnumerable<T> src, Action<T> action)
+### void ForAll(this IEnumerable<T> src, Action<T> action)
 
 Executes action for each element. No exception, if enumeration or action is null
 
-### Times(this int count, Action<int> action)
+### void Times(this int count, Action<int> action)
 
 Executes action n times. No exception, if action is null
 
-### EqualJsonCheck(this object, object toCompare)
+### void EqualJsonCheck(this object, object toCompare)
 
 Compares two objects by serializing them to json string and throws exception if not
 
@@ -28,26 +28,26 @@ Compares two objects by serializing them to json string and throws exception if 
 
 Compares two objects by serializing them to json string and returns bool
 
-### ExpEnv(this string)
+### string ExpEnv(this string)
 
 Shortcut for Environment.ExpandEnvironmentVariables
 
-### IsEmpty(this IEnumerable value)
+### bool IsEmpty(this IEnumerable value)
 
 Checks if a IEnumerable is empty
 
-### IsNotEmpty(this IEnumerable value)
+### bool IsNotEmpty(this IEnumerable value)
 
 Checks if a IEnumerable is not empty
 
-### IsNullOrEmpty(this IEnumerable value)
+### bool IsNullOrEmpty(this IEnumerable value)
 
 Checks if a IEnumerable is null or empty
 
-### IsNotNullOrEmpty(this IEnumerable value)
+### bool IsNotNullOrEmpty(this IEnumerable value)
 
 Checks if a IEnumerable is not null or empty
 
-### UseFormat(this string text, params string[] @params)
+### string UseFormat(this string text, params string[] @params)
 
 Uses string.Format to replace placeholder values
