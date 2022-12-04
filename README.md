@@ -47,3 +47,7 @@ Checks if a IEnumerable is null or empty
 ### IsNotNullOrEmpty(this IEnumerable value)
 
 Checks if a IEnumerable is not null or empty
+
+### UseFormat(this string text, params string[] @params)
+
+Uses string.Format to replace placeholder values

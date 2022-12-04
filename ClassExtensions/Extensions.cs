@@ -51,6 +51,11 @@ public static class Extensions
     public static bool IsNotNullOrEmpty(this IEnumerable value) =>
         !value.IsNullOrEmpty();
 
+    public static string UseFormat(this string text, params string[] @params)
+    {
+        return string.Format(text, @params);
+    }
+
     private static (string self, string toCompare) ConvertToJson<T>(T self, T toCompare)
     {
         var a = JsonSerializer.Serialize(self);

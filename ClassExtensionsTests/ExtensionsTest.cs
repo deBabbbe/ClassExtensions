@@ -273,4 +273,43 @@ public class ExtensionsTest
     {
         Assert.IsTrue(values.IsNotNullOrEmpty(), $"'{values}' was not null or empty");
     }
+
+    [Test]
+    public void UseFormatTest_NotingToReplace()
+    {
+        var testString = Helper.GenerateRandomString();
+        var result = testString.UseFormat("a", "b", "c");
+
+        Assert.AreEqual(testString, result);
+    }
+
+    [Test]
+    public void UseFormatTest_Replaces3Values()
+    {
+        var testString = "{0}{1}{2}";
+        var expected = "abc";
+
+        var result = testString.UseFormat("a", "b", "c");
+
+        Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void UseFormatTest_ReplacesSingleValue3Time()
+    {
+        var testString = "{0}{0}{0}";
+        var expected = "aaa";
+
+        var result = testString.UseFormat("a", "b", "c");
+
+        Assert.AreEqual(expected, result);
+    }
+
+    [Test]
+    public void UseFormatTest_ThrowsExceptionIfParamsAreNotPassed()
+    {
+        var testString = "{0}{1}{2}";
+
+        Assert.Throws<FormatException>(() => testString.UseFormat("a", "b"));
+    }
 }
