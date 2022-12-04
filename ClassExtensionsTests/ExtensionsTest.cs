@@ -119,9 +119,9 @@ public class ExtensionsTest
     public void TimesTest()
     {
         var resultString = "";
-        var expectedString = "0,1,2,3,4,5,6,7,8,9,";
-
-        10.Times(t => resultString += $"{t},");
+        const string expectedString = "0,1,2,3,4,5,6,7,8,9,";
+        const int ten = 10;
+        ten.Times(t => resultString += $"{t},");
 
         Assert.AreEqual(expectedString, resultString);
     }
@@ -129,7 +129,8 @@ public class ExtensionsTest
     [Test]
     public void TimesTest_ActionNull_DoesNotThrowException()
     {
-        Assert.DoesNotThrow(() => 10.Times(null!));
+        const int multiple = 10;
+        Assert.DoesNotThrow(() => multiple.Times(null!));
     }
 
     [Test]
