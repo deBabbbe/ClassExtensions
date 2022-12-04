@@ -271,7 +271,6 @@ public class ExtensionsTest
     [TestCaseSource(nameof(_notNullOrEmptyValues))]
     public void IsNotNullOrEmptyTest_ReturnsFalse(IEnumerable values)
     {
-        var text = Helper.GenerateRandomString();
-        Assert.IsTrue(text.IsNotNullOrEmpty(), "'{text}' was not null or empty");
+        Assert.IsTrue(values.IsNotNullOrEmpty(), $"'{values}' was not null or empty");
     }
 }
