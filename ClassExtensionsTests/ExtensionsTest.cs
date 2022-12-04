@@ -83,6 +83,7 @@ public class ExtensionsTest
         var list = new List<string> { "A", "b", "C", "d" };
         var expectedString = "!A!!b!!C!!d!";
         var stringToCheck = "";
+
         list.ForAll(entry => stringToCheck += $"!{entry}!");
 
         Assert.AreEqual(expectedString, stringToCheck);
@@ -94,6 +95,7 @@ public class ExtensionsTest
         var list = new List<int> { 1, 2, 3, 4, 5 };
         var expectedString = "!1!!2!!3!!4!!5!";
         var stringToCheck = "";
+
         list.ForAll(entry => stringToCheck += $"!{entry}!");
 
         Assert.AreEqual(expectedString, stringToCheck);
@@ -156,6 +158,7 @@ public class ExtensionsTest
         var expected = @"{""Amount"":108,""Message"":""Hella""} not equal to {""Amount"":108,""Message"":""Hello""}";
 
         var exception = Assert.Throws<Exception>(() => a.EqualJsonCheck(b));
+
         StringAssert.Contains(expected, exception!.Message);
     }
 
@@ -286,8 +289,8 @@ public class ExtensionsTest
     [Test]
     public void UseFormatTest_Replaces3Values()
     {
-        var testString = "{0}{1}{2}";
-        var expected = "abc";
+        const string testString = "{0}{1}{2}";
+        const string expected = "abc";
 
         var result = testString.UseFormat("a", "b", "c");
 
@@ -297,8 +300,8 @@ public class ExtensionsTest
     [Test]
     public void UseFormatTest_ReplacesSingleValue3Time()
     {
-        var testString = "{0}{0}{0}";
-        var expected = "aaa";
+        const string testString = "{0}{0}{0}";
+        const string expected = "aaa";
 
         var result = testString.UseFormat("a", "b", "c");
 
@@ -308,7 +311,7 @@ public class ExtensionsTest
     [Test]
     public void UseFormatTest_ThrowsExceptionIfParamsAreNotPassed()
     {
-        var testString = "{0}{1}{2}";
+        const string testString = "{0}{1}{2}";
 
         Assert.Throws<FormatException>(() => testString.UseFormat("a", "b"));
     }
