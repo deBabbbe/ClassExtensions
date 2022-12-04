@@ -104,7 +104,7 @@ public class ExtensionsTest
     [Test]
     public void ForAllTest_EnumerationNull_NoException()
     {
-        IEnumerable<object> list = null!;
+        const IEnumerable<object> list = null!;
         Assert.DoesNotThrow(() => list.ForAll(entry => "".ToArray()));
     }
 
