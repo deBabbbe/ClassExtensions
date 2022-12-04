@@ -1,5 +1,7 @@
 [![.NET Core Desktop](https://github.com/deBabbbe/ClassExtensions/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/deBabbbe/ClassExtensions/actions/workflows/dotnet-desktop.yml)
 
+[![CodeQL](https://github.com/deBabbbe/ClassExtensions/actions/workflows/codeql.yml/badge.svg)](https://github.com/deBabbbe/ClassExtensions/actions/workflows/codeql.yml)
+
 # Extensions for C# classes
 
 ### IsNull(this object)
