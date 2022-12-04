@@ -81,7 +81,7 @@ public class ExtensionsTest
     public void ForAllTest()
     {
         var list = new List<string> { "A", "b", "C", "d" };
-        var expectedString = "!A!!b!!C!!d!";
+        const string expectedString = "!A!!b!!C!!d!";
         var stringToCheck = "";
 
         list.ForAll(entry => stringToCheck += $"!{entry}!");
@@ -93,7 +93,7 @@ public class ExtensionsTest
     public void ForAllTest_DifferentType()
     {
         var list = new List<int> { 1, 2, 3, 4, 5 };
-        var expectedString = "!1!!2!!3!!4!!5!";
+        const string expectedString = "!1!!2!!3!!4!!5!";
         var stringToCheck = "";
 
         list.ForAll(entry => stringToCheck += $"!{entry}!");
@@ -121,6 +121,7 @@ public class ExtensionsTest
         var resultString = "";
         const string expectedString = "0,1,2,3,4,5,6,7,8,9,";
         const int ten = 10;
+
         ten.Times(t => resultString += $"{t},");
 
         Assert.AreEqual(expectedString, resultString);
@@ -168,10 +169,10 @@ public class ExtensionsTest
     {
         var a = DateTime.MaxValue;
         var b = DateTime.MinValue;
-
         const string expected = @"""9999-12-31T23:59:59.9999999"" not equal to ""0001-01-01T00:00:00""";
 
         var exception = Assert.Throws<Exception>(() => a.EqualJsonCheck(b));
+
         StringAssert.Contains(expected, exception!.Message);
     }
 
