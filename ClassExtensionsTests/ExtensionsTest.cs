@@ -156,7 +156,7 @@ public class ExtensionsTest
     {
         var a = new { Amount = 108, Message = "Hella" };
         var b = new { Amount = 108, Message = "Hello" };
-        var expected = @"{""Amount"":108,""Message"":""Hella""} not equal to {""Amount"":108,""Message"":""Hello""}";
+        const string expected = @"{""Amount"":108,""Message"":""Hella""} not equal to {""Amount"":108,""Message"":""Hello""}";
 
         var exception = Assert.Throws<Exception>(() => a.EqualJsonCheck(b));
 
@@ -169,7 +169,7 @@ public class ExtensionsTest
         var a = DateTime.MaxValue;
         var b = DateTime.MinValue;
 
-        var expected = @"""9999-12-31T23:59:59.9999999"" not equal to ""0001-01-01T00:00:00""";
+        const string expected = @"""9999-12-31T23:59:59.9999999"" not equal to ""0001-01-01T00:00:00""";
 
         var exception = Assert.Throws<Exception>(() => a.EqualJsonCheck(b));
         StringAssert.Contains(expected, exception!.Message);
