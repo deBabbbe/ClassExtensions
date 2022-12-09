@@ -57,6 +57,6 @@ public static class Extensions
     public static string UseFormat(this string text, params string[] @params) =>
         string.Format(text, @params);
 
-    private static (string self, string toCompare) ConvertToJson<T>(this T self, T toCompare) =>
+    private static (string selfAsString, string toCompareAsString) ConvertToJson<T>(T self, T toCompare) =>
         (JsonSerializer.Serialize(self), JsonSerializer.Serialize(toCompare));
 }
