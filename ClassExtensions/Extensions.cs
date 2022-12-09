@@ -13,7 +13,10 @@ public static class Extensions
     {
         if (enumerable.IsNull() || action.IsNull()) return;
 
-        enumerable.ToList().ForEach(action);
+        foreach(var entry in enumerable)
+        {
+            action(entry);
+        }
     }
 
     public static void Times(this int count, Action<int> action) =>
@@ -54,6 +57,6 @@ public static class Extensions
     public static string UseFormat(this string text, params string[] @params) =>
         string.Format(text, @params);
 
-    private static (string self, string toCompare) ConvertToJson<T>(T self, T toCompare) =>
+    private static (string self, string toCompare) ConvertToJson<T>(this T self, T toCompare) =>
         (JsonSerializer.Serialize(self), JsonSerializer.Serialize(toCompare));
 }
