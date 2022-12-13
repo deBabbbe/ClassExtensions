@@ -20,7 +20,7 @@ public class ExtensionsTest
         Helper.GenerateRandomInt(),
         Helper.GenerateRandomString(),
         Helper.GenerateRandomBool(),
-        Helper.GetGenerateRandomDateTime(),
+        Helper.GenerateRandomDateTime(),
         Guid.NewGuid()
     };
 
