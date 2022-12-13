@@ -44,7 +44,7 @@ public static class Extensions
         Environment.ExpandEnvironmentVariables(name);
 
     public static bool IsEmpty(this IEnumerable value) =>
-        value.Cast<object>().Count() == 0;
+        !value.Cast<object>().Any();
 
     public static bool IsNotEmpty(this IEnumerable value) => !value.IsEmpty();
 
