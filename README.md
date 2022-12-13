@@ -1,6 +1,7 @@
 [![.NET Core Desktop](https://github.com/deBabbbe/ClassExtensions/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/deBabbbe/ClassExtensions/actions/workflows/dotnet-desktop.yml)
-
 [![CodeQL](https://github.com/deBabbbe/ClassExtensions/actions/workflows/codeql.yml/badge.svg)](https://github.com/deBabbbe/ClassExtensions/actions/workflows/codeql.yml)
+[![Codacy Security Scan](https://github.com/deBabbbe/ClassExtensions/actions/workflows/codacy.yml/badge.svg)](https://github.com/deBabbbe/ClassExtensions/actions/workflows/codacy.yml)
+[![SecurityCodeScan](https://github.com/deBabbbe/ClassExtensions/actions/workflows/securitycodescan.yml/badge.svg)](https://github.com/deBabbbe/ClassExtensions/actions/workflows/securitycodescan.yml)
 
 # Extensions for C# classes
 
