@@ -317,4 +317,101 @@ public class ExtensionsTest
 
         Assert.Throws<FormatException>(() => testString.UseFormat("a", "b"));
     }
+
+    [Test]
+    public void PopTest()
+    {
+        var expected = new List<string> { "a", "b", "c", "d" };
+        var list = new List<string> { "a", "b", "c", "d" };
+        list.Count.Times(t =>
+        {
+            var result = list.Pop();
+            Assert.AreEqual(expected[expected.Count - t - 1], result);
+            Assert.AreEqual(expected.Count - (t + 1), list.Count);
+        });
+    }
+
+    [Test]
+    public void PopTest_ListWithDifferentType()
+    {
+        var expected = new List<int> { 1, 2, 3, 4 };
+        var list = new List<int> { 1, 2, 3, 4 };
+        list.Count.Times(t =>
+        {
+            var result = list.Pop();
+            Assert.AreEqual(expected[expected.Count - t - 1], result);
+            Assert.AreEqual(expected.Count - (t + 1), list.Count);
+        });
+    }
+
+    [Test]
+    public void PopTest_EmptyList()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => new List<string>().Pop());
+    }
+
+    [Test]
+    public void ShiftTest()
+    {
+        var expected = new List<string> { "a", "b", "c", "d" };
+        var list = new List<string> { "a", "b", "c", "d" };
+        list.Count.Times(t =>
+        {
+            var result = list.Shift();
+            Assert.AreEqual(expected[t], result);
+            Assert.AreEqual(expected.Count - (t + 1), list.Count);
+        });
+    }
+
+    [Test]
+    public void ShiftTest_ListWithDifferentType()
+    {
+        var expected = new List<int> { 1, 2, 3, 4 };
+        var list = new List<int> { 1, 2, 3, 4 };
+        list.Count.Times(t =>
+        {
+            var result = list.Shift();
+            Assert.AreEqual(expected[t], result);
+            Assert.AreEqual(expected.Count - (t + 1), list.Count);
+        });
+    }
+
+    [Test]
+    public void ShiftTest_EmptyList()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => new List<string>().Shift());
+    }
+
+    [Test]
+    public void UnshiftTest()
+    {
+        var expected = new List<string> { "a", "b", "c", "d" };
+        var list = new List<string> { "b", "c", "d" };
+
+        list.Unshift("a");
+
+        CollectionAssert.AreEqual(expected, list.ToList());
+    }
+
+    [Test]
+    public void UnshiftTest_ListWithDifferentType()
+    {
+        var expected = new List<int> { 1, 2, 3, 4 };
+        var list = new List<int> { 2, 3, 4 };
+
+        list.Unshift(1);
+
+        CollectionAssert.AreEqual(expected, list.ToList());
+    }
+
+    [Test]
+    public void UnshiftTest_EmptyList()
+    {
+        var expected = new List<string> { "A" };
+        var actual = new List<string>();
+
+        actual.Unshift("A");
+
+        CollectionAssert.AreEqual(expected, actual);
+    }
 }
