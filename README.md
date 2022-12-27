@@ -13,7 +13,7 @@ Returns true, if the passed object is null, otherwise false
 
 Returns true, if the passed object is not null, otherwise false
 
-### void ForAll(this IEnumerable<T> src, Action<T> action)
+### void ForAll(this IEnumerable<T> source, Action<T> action)
 
 Executes action for each element. No exception, if enumeration or action is null
 
@@ -53,14 +53,14 @@ Checks if a IEnumerable is not null or empty
 
 Uses string.Format to replace placeholder values
 
-### T Pop\<T\>(this IList\<T\> src)
+### T Pop\<T\>(this IList\<T\> source)
 
 Returns the last element of the list and removes it from the list
 
-### T Shift\<T\>(this IList\<T\> src)
+### T Shift\<T\>(this IList\<T\> source)
 
 Returns the first element of the list and removes it from the list
 
-### void Unshift\<T\>(this IList\<T\> src, T toAdd)
+### void Unshift\<T\>(this IList\<T\> source, T toAdd)
 
-Adds toAdd at the first position of src
+Adds toAdd at the first position of source

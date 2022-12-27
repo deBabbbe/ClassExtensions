@@ -49,28 +49,24 @@ public class ExtensionsTest
         Enumerable.Range(1,5)
     };
 
-    [Test]
     [TestCaseSource(nameof(_nullCases))]
     public void IsNullTest_ReturnsTrue(object @object)
     {
         Assert.IsTrue(@object.IsNull(), $"{@object} was not null");
     }
 
-    [Test]
     [TestCaseSource(nameof(_notNullCases))]
     public void IsNullTest_ReturnsFalse(object @object)
     {
         Assert.IsFalse(@object.IsNull(), $"{@object} was null");
     }
 
-    [Test]
     [TestCaseSource(nameof(_notNullCases))]
     public void IsNotNullTest_ReturnsTrue(object @object)
     {
         Assert.IsTrue(@object.IsNotNull(), $"{@object} was null");
     }
 
-    [Test]
     [TestCaseSource(nameof(_nullCases))]
     public void IsNotNullTest_ReturnsFalse(object @object)
     {
@@ -212,7 +208,6 @@ public class ExtensionsTest
         Assert.IsFalse(a.IsEqualJson(b), "Objects are equal");
     }
 
-    [Test]
     [TestCase("Os")]
     [TestCase("Username")]
     [TestCase("Temp")]
@@ -221,42 +216,36 @@ public class ExtensionsTest
         Assert.AreEqual(name.ExpandEnv(), Environment.ExpandEnvironmentVariables(name));
     }
 
-    [Test]
     [TestCaseSource(nameof(_emptyValues))]
     public void IsEmptyTest_ReturnsTrue(IEnumerable values)
     {
         Assert.IsTrue(values.IsEmpty(), "'' was not empty");
     }
 
-    [Test]
     [TestCaseSource(nameof(_notNullOrEmptyValues))]
     public void IsEmptyTest_ReturnsFalse(IEnumerable values)
     {
         Assert.IsFalse(values.IsEmpty(), $"'{values}' was not empty");
     }
 
-    [Test]
     [TestCaseSource(nameof(_nullOrEmptyValues))]
     public void IsNotEmptyTest_ReturnsFalse(IEnumerable values)
     {
         Assert.IsFalse("".IsNotEmpty(), "'' was not empty");
     }
 
-    [Test]
     [TestCaseSource(nameof(_notNullOrEmptyValues))]
     public void IsNotEmptyTest_ReturnsTrue(IEnumerable values)
     {
         Assert.IsTrue(values.IsNotEmpty(), $"'{values}' was not empty");
     }
 
-    [Test]
     [TestCaseSource(nameof(_nullOrEmptyValues))]
     public void IsNullOrEmptyTest_ReturnsTrue(IEnumerable values)
     {
         Assert.IsTrue(values.IsNullOrEmpty(), $"'{values}' was not null or empty");
     }
 
-    [Test]
     [TestCaseSource(nameof(_notNullOrEmptyValues))]
 
     public void IsNullOrEmptyTest_ReturnsFalse(IEnumerable values)
@@ -264,7 +253,6 @@ public class ExtensionsTest
         Assert.IsFalse(values.IsNullOrEmpty(), $"'{values}' was null or empty");
     }
 
-    [Test]
     [TestCaseSource(nameof(_nullOrEmptyValues))]
 
     public void IsNotNullOrEmptyTest_ReturnsTrue(IEnumerable values)
@@ -272,7 +260,6 @@ public class ExtensionsTest
         Assert.IsFalse(values.IsNotNullOrEmpty(), $"'{values}' was null or empty");
     }
 
-    [Test]
     [TestCaseSource(nameof(_notNullOrEmptyValues))]
     public void IsNotNullOrEmptyTest_ReturnsFalse(IEnumerable values)
     {

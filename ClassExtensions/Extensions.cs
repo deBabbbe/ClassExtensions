@@ -13,7 +13,7 @@ public static class Extensions
     {
         if (enumerable.IsNull() || action.IsNull()) return;
 
-        foreach(var entry in enumerable)
+        foreach (var entry in enumerable)
         {
             action(entry);
         }
@@ -57,22 +57,22 @@ public static class Extensions
     public static string UseFormat(this string text, params string[] @params) =>
         string.Format(text, @params);
 
-    public static T Pop<T>(this IList<T> src)
+    public static T Pop<T>(this IList<T> source)
     {
-        var idx = src.Count() - 1;
-        var result = src.ElementAt(idx);
-        src.RemoveAt(idx);
+        var idx = source.Count() - 1;
+        var result = source.ElementAt(idx);
+        source.RemoveAt(idx);
         return result;
     }
 
-    public static T Shift<T>(this IList<T> src)
+    public static T Shift<T>(this IList<T> source)
     {
-        var result = src.ElementAt(0);
-        src.RemoveAt(0);
+        var result = source.ElementAt(0);
+        source.RemoveAt(0);
         return result;
     }
 
-    public static void Unshift<T>(this IList<T> src, T toAdd) => src.Insert(0, toAdd);
+    public static void Unshift<T>(this IList<T> source, T toAdd) => source.Insert(0, toAdd);
 
     private static (string selfAsString, string toCompareAsString) ConvertToJson<T>(T self, T toCompare) =>
         (JsonSerializer.Serialize(self), JsonSerializer.Serialize(toCompare));
