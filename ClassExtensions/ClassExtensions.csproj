@@ -2,14 +2,16 @@
 
   <PropertyGroup>
     <PackageId>ClassExtensions</PackageId>
-    <Version>0.0.3</Version>
+    <Version>0.0.4</Version>
     <Authors>deBabbe</Authors>
     <Company></Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/deBabbbe/ClassExtensions.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/deBabbbe/ClassExtensions</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType> 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 </Project>
