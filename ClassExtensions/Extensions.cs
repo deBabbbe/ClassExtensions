@@ -1,5 +1,5 @@
-using System.Text.Json;
 using System.Collections;
+using static System.Text.Json.JsonSerializer;
 
 namespace ClassExtensions;
 
@@ -75,5 +75,5 @@ public static class Extensions
     public static void Unshift<T>(this IList<T> source, T toAdd) => source.Insert(0, toAdd);
 
     private static (string selfAsString, string toCompareAsString) ConvertToJson<T>(T self, T toCompare) =>
-        (JsonSerializer.Serialize(self), JsonSerializer.Serialize(toCompare));
+        (Serialize(self), Serialize(toCompare));
 }
