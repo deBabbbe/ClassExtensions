@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using ClassExtensions;
 using TestHelper;
 
@@ -50,28 +51,20 @@ public class ExtensionsTest
     };
 
     [TestCaseSource(nameof(_nullCases))]
-    public void IsNullTest_ReturnsTrue(object @object)
-    {
-        Assert.IsTrue(@object.IsNull(), $"{@object} was not null");
-    }
+    public void IsNullTest_ReturnsTrue(object @object) => 
+        Assert.That(@object.IsNull(), Is.True, $"{@object} was not null");
 
     [TestCaseSource(nameof(_notNullCases))]
-    public void IsNullTest_ReturnsFalse(object @object)
-    {
-        Assert.IsFalse(@object.IsNull(), $"{@object} was null");
-    }
+    public void IsNullTest_ReturnsFalse(object @object) =>
+        Assert.That(@object.IsNull(), Is.False, $"{@object} was null");
 
     [TestCaseSource(nameof(_notNullCases))]
-    public void IsNotNullTest_ReturnsTrue(object @object)
-    {
-        Assert.IsTrue(@object.IsNotNull(), $"{@object} was null");
-    }
+    public void IsNotNullTest_ReturnsTrue(object @object) => 
+        Assert.That(@object.IsNotNull(), Is.True, $"{@object} was null");
 
     [TestCaseSource(nameof(_nullCases))]
-    public void IsNotNullTest_ReturnsFalse(object @object)
-    {
-        Assert.IsFalse(@object.IsNotNull(), $"{@object} was not null");
-    }
+    public void IsNotNullTest_ReturnsFalse(object @object) => 
+        Assert.That(@object.IsNotNull(), Is.False, $"{@object} was not null");
 
     [Test]
     public void ForAllTest()
@@ -82,7 +75,7 @@ public class ExtensionsTest
 
         list.ForAll(entry => stringToCheck += $"!{entry}!");
 
-        Assert.AreEqual(expectedString, stringToCheck);
+        Assert.That(stringToCheck, Is.EqualTo(expectedString));
     }
 
     [Test]
@@ -94,14 +87,14 @@ public class ExtensionsTest
 
         list.ForAll(entry => stringToCheck += $"!{entry}!");
 
-        Assert.AreEqual(expectedString, stringToCheck);
+        Assert.That(stringToCheck, Is.EqualTo(expectedString));
     }
 
     [Test]
     public void ForAllTest_EnumerationNull_NoException()
     {
         const IEnumerable<object> list = null!;
-        Assert.DoesNotThrow(() => list.ForAll(entry => "".ToArray()));
+        Assert.DoesNotThrow(() => list.ForAll(entry => string.Empty.ToArray()));
     }
 
     [Test]
@@ -120,7 +113,7 @@ public class ExtensionsTest
 
         ten.Times(t => resultString += $"{t},");
 
-        Assert.AreEqual(expectedString, resultString);
+        Assert.That(resultString, Is.EqualTo(expectedString));
     }
 
     [Test]
@@ -156,8 +149,7 @@ public class ExtensionsTest
         const string expected = @"{""Amount"":108,""Message"":""Hella""} not equal to {""Amount"":108,""Message"":""Hello""}";
 
         var exception = Assert.Throws<Exception>(() => a.EqualJsonCheck(b));
-
-        StringAssert.Contains(expected, exception!.Message);
+        Assert.That(exception.Message, Contains.Substring(expected));
     }
 
     [Test]
@@ -169,7 +161,7 @@ public class ExtensionsTest
 
         var exception = Assert.Throws<Exception>(() => a.EqualJsonCheck(b));
 
-        StringAssert.Contains(expected, exception!.Message);
+        Assert.That(exception.Message, Contains.Substring(expected));
     }
 
     [Test]
@@ -178,7 +170,7 @@ public class ExtensionsTest
         var a = new { Amount = 108, Message = "Hello" };
         var b = new { Amount = 108, Message = "Hello" };
 
-        Assert.IsTrue(a.IsEqualJson(b), "Objects are not equal");
+        Assert.That(a.IsEqualJson(b), Is.True, "Objects are not equal");
     }
 
     [Test]
@@ -187,7 +179,7 @@ public class ExtensionsTest
         var a = DateTime.MaxValue;
         var b = DateTime.MaxValue;
 
-        Assert.IsTrue(a.IsEqualJson(b), "Objects are not equal");
+        Assert.That(a.IsEqualJson(b), Is.True, "Objects are not equal");
     }
 
     [Test]
@@ -196,7 +188,7 @@ public class ExtensionsTest
         var a = new { Amount = 108, Message = "Hella" };
         var b = new { Amount = 108, Message = "Hello" };
 
-        Assert.IsFalse(a.IsEqualJson(b), "Objects are equal");
+        Assert.That(a.IsEqualJson(b), Is.False, "Objects are equal");
     }
 
     [Test]
@@ -205,66 +197,48 @@ public class ExtensionsTest
         var a = DateTime.MaxValue;
         var b = DateTime.MinValue;
 
-        Assert.IsFalse(a.IsEqualJson(b), "Objects are equal");
+        Assert.That(a.IsEqualJson(b), Is.False, "Objects are equal");
     }
 
     [TestCase("Os")]
     [TestCase("Username")]
     [TestCase("Temp")]
-    public void ExpandEnvTest(string name)
-    {
-        Assert.AreEqual(name.ExpandEnv(), Environment.ExpandEnvironmentVariables(name));
-    }
+    public void ExpandEnvTest(string name) => 
+        Assert.That(Environment.ExpandEnvironmentVariables(name), Is.EqualTo(name.ExpandEnv()));
 
     [TestCaseSource(nameof(_emptyValues))]
-    public void IsEmptyTest_ReturnsTrue(IEnumerable values)
-    {
-        Assert.IsTrue(values.IsEmpty(), "'' was not empty");
-    }
+    public void IsEmptyTest_ReturnsTrue(IEnumerable values) => 
+        Assert.That(values.IsEmpty(), Is.True, "'' was not empty");
 
     [TestCaseSource(nameof(_notNullOrEmptyValues))]
-    public void IsEmptyTest_ReturnsFalse(IEnumerable values)
-    {
-        Assert.IsFalse(values.IsEmpty(), $"'{values}' was not empty");
-    }
+    public void IsEmptyTest_ReturnsFalse(IEnumerable values) => 
+        Assert.That(values.IsEmpty(), Is.False, $"'{values}' was not empty");
 
     [TestCaseSource(nameof(_nullOrEmptyValues))]
-    public void IsNotEmptyTest_ReturnsFalse(IEnumerable values)
-    {
-        Assert.IsFalse("".IsNotEmpty(), "'' was not empty");
-    }
+    public void IsNotEmptyTest_ReturnsFalse(IEnumerable values) => 
+        Assert.That("".IsNotEmpty(), Is.False, "'' was not empty");
 
     [TestCaseSource(nameof(_notNullOrEmptyValues))]
-    public void IsNotEmptyTest_ReturnsTrue(IEnumerable values)
-    {
-        Assert.IsTrue(values.IsNotEmpty(), $"'{values}' was not empty");
-    }
+    public void IsNotEmptyTest_ReturnsTrue(IEnumerable values) => 
+        Assert.That(values.IsNotEmpty(), Is.True, $"'{values}' was not empty");
 
     [TestCaseSource(nameof(_nullOrEmptyValues))]
-    public void IsNullOrEmptyTest_ReturnsTrue(IEnumerable values)
-    {
-        Assert.IsTrue(values.IsNullOrEmpty(), $"'{values}' was not null or empty");
-    }
+    public void IsNullOrEmptyTest_ReturnsTrue(IEnumerable values) => 
+        Assert.That(values.IsNullOrEmpty(), Is.True, $"'{values}' was not null or empty");
 
     [TestCaseSource(nameof(_notNullOrEmptyValues))]
 
-    public void IsNullOrEmptyTest_ReturnsFalse(IEnumerable values)
-    {
-        Assert.IsFalse(values.IsNullOrEmpty(), $"'{values}' was null or empty");
-    }
+    public void IsNullOrEmptyTest_ReturnsFalse(IEnumerable values) => 
+        Assert.That(values.IsNullOrEmpty(), Is.False, $"'{values}' was null or empty");
 
     [TestCaseSource(nameof(_nullOrEmptyValues))]
 
-    public void IsNotNullOrEmptyTest_ReturnsTrue(IEnumerable values)
-    {
-        Assert.IsFalse(values.IsNotNullOrEmpty(), $"'{values}' was null or empty");
-    }
+    public void IsNotNullOrEmptyTest_ReturnsTrue(IEnumerable values) => 
+        Assert.That(values.IsNotNullOrEmpty(), Is.False, $"'{values}' was null or empty");
 
     [TestCaseSource(nameof(_notNullOrEmptyValues))]
-    public void IsNotNullOrEmptyTest_ReturnsFalse(IEnumerable values)
-    {
-        Assert.IsTrue(values.IsNotNullOrEmpty(), $"'{values}' was not null or empty");
-    }
+    public void IsNotNullOrEmptyTest_ReturnsFalse(IEnumerable values) => 
+        Assert.That(values.IsNotNullOrEmpty(), Is.True, $"'{values}' was not null or empty");
 
     [Test]
     public void UseFormatTest_NotingToReplace()
@@ -272,7 +246,7 @@ public class ExtensionsTest
         var testString = Helper.GenerateRandomString();
         var result = testString.UseFormat("a", "b", "c");
 
-        Assert.AreEqual(testString, result);
+        Assert.That(result, Is.EqualTo(testString));
     }
 
     [Test]
@@ -283,7 +257,7 @@ public class ExtensionsTest
 
         var result = testString.UseFormat("a", "b", "c");
 
-        Assert.AreEqual(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
     [Test]
@@ -294,7 +268,7 @@ public class ExtensionsTest
 
         var result = testString.UseFormat("a", "b", "c");
 
-        Assert.AreEqual(expected, result);
+        Assert.That(result, Is.EqualTo(expected));
     }
 
     [Test]
@@ -313,8 +287,8 @@ public class ExtensionsTest
         list.Count.Times(t =>
         {
             var result = list.Pop();
-            Assert.AreEqual(expected[expected.Count - t - 1], result);
-            Assert.AreEqual(expected.Count - (t + 1), list.Count);
+            Assert.That(result, Is.EqualTo(expected[expected.Count - t - 1]));
+            Assert.That(list.Count, Is.EqualTo(expected.Count - (t + 1)));
         });
     }
 
@@ -326,16 +300,14 @@ public class ExtensionsTest
         list.Count.Times(t =>
         {
             var result = list.Pop();
-            Assert.AreEqual(expected[expected.Count - t - 1], result);
-            Assert.AreEqual(expected.Count - (t + 1), list.Count);
+            Assert.That(result, Is.EqualTo(expected[expected.Count - t - 1]));
+            Assert.That(list.Count, Is.EqualTo(expected.Count - (t + 1)));
         });
     }
 
     [Test]
-    public void PopTest_EmptyList()
-    {
+    public void PopTest_EmptyList() => 
         Assert.Throws<ArgumentOutOfRangeException>(() => new List<string>().Pop());
-    }
 
     [Test]
     public void ShiftTest()
@@ -345,8 +317,8 @@ public class ExtensionsTest
         list.Count.Times(t =>
         {
             var result = list.Shift();
-            Assert.AreEqual(expected[t], result);
-            Assert.AreEqual(expected.Count - (t + 1), list.Count);
+            Assert.That(result, Is.EqualTo(expected[t]));
+            Assert.That(list.Count, Is.EqualTo(expected.Count - (t + 1)));
         });
     }
 
@@ -358,16 +330,14 @@ public class ExtensionsTest
         list.Count.Times(t =>
         {
             var result = list.Shift();
-            Assert.AreEqual(expected[t], result);
-            Assert.AreEqual(expected.Count - (t + 1), list.Count);
+            Assert.That(result, Is.EqualTo(expected[t]));
+            Assert.That(list.Count, Is.EqualTo(expected.Count - (t + 1)));
         });
     }
 
     [Test]
-    public void ShiftTest_EmptyList()
-    {
+    public void ShiftTest_EmptyList() => 
         Assert.Throws<ArgumentOutOfRangeException>(() => new List<string>().Shift());
-    }
 
     [Test]
     public void UnshiftTest()
@@ -376,8 +346,7 @@ public class ExtensionsTest
         var list = new List<string> { "b", "c", "d" };
 
         list.Unshift("a");
-
-        CollectionAssert.AreEqual(expected, list.ToList());
+        Assert.That(list, Is.EqualTo(expected));
     }
 
     [Test]
@@ -388,7 +357,7 @@ public class ExtensionsTest
 
         list.Unshift(1);
 
-        CollectionAssert.AreEqual(expected, list.ToList());
+        Assert.That(list, Is.EqualTo(expected));
     }
 
     [Test]
@@ -399,6 +368,6 @@ public class ExtensionsTest
 
         actual.Unshift("A");
 
-        CollectionAssert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 }
