@@ -2,11 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using ClassExtensions;
 using TestHelper;
+using static System.Text.Json.JsonSerializer;
 
 namespace ClassExtensionsTest;
 
 public class ExtensionsTest
 {
+    private StringWriter? _stringWriter;
+
+    [SetUp]
+    public void SetUp()
+    {
+        _stringWriter = new StringWriter();
+        Console.SetOut(_stringWriter);
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        _stringWriter.Dispose();
+    }
+
     private static object[] _nullCases =
     {
         null!,
@@ -51,7 +67,7 @@ public class ExtensionsTest
     };
 
     [TestCaseSource(nameof(_nullCases))]
-    public void IsNullTest_ReturnsTrue(object @object) => 
+    public void IsNullTest_ReturnsTrue(object @object) =>
         Assert.That(@object.IsNull(), Is.True, $"{@object} was not null");
 
     [TestCaseSource(nameof(_notNullCases))]
@@ -59,11 +75,11 @@ public class ExtensionsTest
         Assert.That(@object.IsNull(), Is.False, $"{@object} was null");
 
     [TestCaseSource(nameof(_notNullCases))]
-    public void IsNotNullTest_ReturnsTrue(object @object) => 
+    public void IsNotNullTest_ReturnsTrue(object @object) =>
         Assert.That(@object.IsNotNull(), Is.True, $"{@object} was null");
 
     [TestCaseSource(nameof(_nullCases))]
-    public void IsNotNullTest_ReturnsFalse(object @object) => 
+    public void IsNotNullTest_ReturnsFalse(object @object) =>
         Assert.That(@object.IsNotNull(), Is.False, $"{@object} was not null");
 
     [Test]
@@ -150,6 +166,7 @@ public class ExtensionsTest
 
         var exception = Assert.Throws<Exception>(() => a.EqualJsonCheck(b));
         Assert.That(exception.Message, Contains.Substring(expected));
+        Assert.That(_stringWriter.ToString(), Is.EqualTo($"{Serialize(a)} not equal to {Serialize(b)}\r\n"));
     }
 
     [Test]
@@ -203,41 +220,41 @@ public class ExtensionsTest
     [TestCase("Os")]
     [TestCase("Username")]
     [TestCase("Temp")]
-    public void ExpandEnvTest(string name) => 
+    public void ExpandEnvTest(string name) =>
         Assert.That(Environment.ExpandEnvironmentVariables(name), Is.EqualTo(name.ExpandEnv()));
 
     [TestCaseSource(nameof(_emptyValues))]
-    public void IsEmptyTest_ReturnsTrue(IEnumerable values) => 
+    public void IsEmptyTest_ReturnsTrue(IEnumerable values) =>
         Assert.That(values.IsEmpty(), Is.True, "'' was not empty");
 
     [TestCaseSource(nameof(_notNullOrEmptyValues))]
-    public void IsEmptyTest_ReturnsFalse(IEnumerable values) => 
+    public void IsEmptyTest_ReturnsFalse(IEnumerable values) =>
         Assert.That(values.IsEmpty(), Is.False, $"'{values}' was not empty");
 
     [TestCaseSource(nameof(_nullOrEmptyValues))]
-    public void IsNotEmptyTest_ReturnsFalse(IEnumerable values) => 
+    public void IsNotEmptyTest_ReturnsFalse(IEnumerable values) =>
         Assert.That("".IsNotEmpty(), Is.False, "'' was not empty");
 
     [TestCaseSource(nameof(_notNullOrEmptyValues))]
-    public void IsNotEmptyTest_ReturnsTrue(IEnumerable values) => 
+    public void IsNotEmptyTest_ReturnsTrue(IEnumerable values) =>
         Assert.That(values.IsNotEmpty(), Is.True, $"'{values}' was not empty");
 
     [TestCaseSource(nameof(_nullOrEmptyValues))]
-    public void IsNullOrEmptyTest_ReturnsTrue(IEnumerable values) => 
+    public void IsNullOrEmptyTest_ReturnsTrue(IEnumerable values) =>
         Assert.That(values.IsNullOrEmpty(), Is.True, $"'{values}' was not null or empty");
 
     [TestCaseSource(nameof(_notNullOrEmptyValues))]
 
-    public void IsNullOrEmptyTest_ReturnsFalse(IEnumerable values) => 
+    public void IsNullOrEmptyTest_ReturnsFalse(IEnumerable values) =>
         Assert.That(values.IsNullOrEmpty(), Is.False, $"'{values}' was null or empty");
 
     [TestCaseSource(nameof(_nullOrEmptyValues))]
 
-    public void IsNotNullOrEmptyTest_ReturnsTrue(IEnumerable values) => 
+    public void IsNotNullOrEmptyTest_ReturnsTrue(IEnumerable values) =>
         Assert.That(values.IsNotNullOrEmpty(), Is.False, $"'{values}' was null or empty");
 
     [TestCaseSource(nameof(_notNullOrEmptyValues))]
-    public void IsNotNullOrEmptyTest_ReturnsFalse(IEnumerable values) => 
+    public void IsNotNullOrEmptyTest_ReturnsFalse(IEnumerable values) =>
         Assert.That(values.IsNotNullOrEmpty(), Is.True, $"'{values}' was not null or empty");
 
     [Test]
@@ -306,7 +323,7 @@ public class ExtensionsTest
     }
 
     [Test]
-    public void PopTest_EmptyList() => 
+    public void PopTest_EmptyList() =>
         Assert.Throws<ArgumentOutOfRangeException>(() => new List<string>().Pop());
 
     [Test]
@@ -336,7 +353,7 @@ public class ExtensionsTest
     }
 
     [Test]
-    public void ShiftTest_EmptyList() => 
+    public void ShiftTest_EmptyList() =>
         Assert.Throws<ArgumentOutOfRangeException>(() => new List<string>().Shift());
 
     [Test]
