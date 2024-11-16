@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using ClassExtensions;
 using TestHelper;
 using static System.Text.Json.JsonSerializer;
@@ -8,20 +7,15 @@ namespace ClassExtensionsTest;
 
 public class ExtensionsTest
 {
-    private StringWriter? _stringWriter;
+    private StringWriter _stringWriter;
+    
+    public ExtensionsTest() => _stringWriter = new StringWriter();
 
-    [SetUp]
-    public void SetUp()
-    {
-        _stringWriter = new StringWriter();
-        Console.SetOut(_stringWriter);
-    }
+    [OneTimeSetUp]
+    public void SetUp() => Console.SetOut(_stringWriter);
 
-    [TearDown]
-    public void TearDown()
-    {
-        _stringWriter.Dispose();
-    }
+    [OneTimeTearDown]
+    public void TearDown() => _stringWriter.Dispose();
 
     private static object[] _nullCases =
     {
