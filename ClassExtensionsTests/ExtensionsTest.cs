@@ -8,7 +8,7 @@ namespace ClassExtensionsTest;
 public class ExtensionsTest
 {
     private StringWriter _stringWriter;
-    
+
     public ExtensionsTest() => _stringWriter = new StringWriter();
 
     [OneTimeSetUp]
@@ -381,4 +381,27 @@ public class ExtensionsTest
 
         Assert.That(actual, Is.EqualTo(expected));
     }
+
+    [Test]
+    public void ToByteArrayTest()
+    {
+        var expected = new byte[] { 1, 2, 3, 4, 5 };
+        var stream = new MemoryStream(expected);
+
+        var result = stream.ToByteArray();
+
+        Assert.That(result, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void ToStreamTest()
+    {
+        var expected = new byte[] { 1, 2, 3, 4, 5 };
+        var stream = new MemoryStream(expected);
+
+        var result = expected.ToStream();
+
+        Assert.That((result as MemoryStream).ToArray(), Is.EqualTo(stream.ToArray()));
+    }
+
 }

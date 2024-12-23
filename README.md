@@ -64,3 +64,11 @@ Returns the first element of the list and removes it from the list
 ### void Unshift\<T\>(this IList\<T\> source, T toAdd)
 
 Adds toAdd at the first position of source
+
+### byte[] ToByteArray(this Stream stream)
+
+Retruns a byte[] from a stream
+
+### Stream ToStream(this byte[] byteArray)
+
+Retruns a stream from a byte[]

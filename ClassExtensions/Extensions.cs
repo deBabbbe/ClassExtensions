@@ -74,6 +74,16 @@ public static class Extensions
 
     public static void Unshift<T>(this IList<T> source, T toAdd) => source.Insert(0, toAdd);
 
+    public static byte[] ToByteArray(this Stream stream)
+    {
+        using var memoryStream = new MemoryStream();
+        stream.CopyTo(memoryStream);
+        return memoryStream.ToArray();
+    }    
+
+    public static Stream ToStream(this byte[] byteArray) => 
+        new MemoryStream(byteArray);
+
     private static (string selfAsString, string toCompareAsString) ConvertToJson<T>(T self, T toCompare) =>
         (Serialize(self), Serialize(toCompare));
 }
