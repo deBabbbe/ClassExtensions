@@ -72,3 +72,6 @@ Retruns a byte[] from a stream
 ### Stream ToStream(this byte[] byteArray)
 
 Retruns a stream from a byte[]
+
+### bool None<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+Equivalent to !source.Any(predicate) / !source.Any()

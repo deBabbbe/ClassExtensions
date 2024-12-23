@@ -401,8 +401,63 @@ public class ExtensionsTest
 
         using var result = expected.ToStream();
 
-        Assert.That(result , Is.Not.Null);
-        Assert.That((result as MemoryStream).ToArray(), Is.EqualTo(stream.ToArray()));
+        Assert.That(result, Is.Not.Null);
+        Assert.That((result as MemoryStream)!.ToArray(), Is.EqualTo(stream.ToArray()));
     }
 
+    [Test]
+    public void NoneTest_True()
+    {
+        var list = new List<int> { 1, 2, 3, 4, 5 };
+        Assert.That(list.None(e => e > 5), Is.True);
+    }
+
+    [Test]
+    public void NoneTest_False()
+    {
+        var list = new List<int> { 1, 2, 3, 4, 5 };
+        Assert.That(list.None(e => e < 5), Is.False);
+    }
+
+    [Test]
+    public void NoneTest_Empty()
+    {
+        var list = new List<int>();
+        Assert.That(list.None(_ => true), Is.True);
+    }
+
+    [Test]
+    public void NoneTest_Null()
+    {
+        List<int> list = null;
+        Assert.That(list!.None(_ => true), Is.True);
+    }
+
+    [Test]
+    public void NoneTest_True_NoPredicate()
+    {
+        var list = new List<int>();
+        Assert.That(list.None(), Is.True);
+    }
+
+    [Test]
+    public void NoneTest_False_NoPredicate()
+    {
+        var list = new List<int> { 1, 2, 3, 4, 5 };
+        Assert.That(list.None(), Is.False);
+    }
+
+    [Test]
+    public void NoneTest_Empty_NoPredicate()
+    {
+        var list = new List<int>();
+        Assert.That(list.None(), Is.True);
+    }
+
+    [Test]
+    public void NoneTest_Null_NoPredicate()
+    {
+        List<int> list = null;
+        Assert.That(list!.None(), Is.True);
+    }
 }

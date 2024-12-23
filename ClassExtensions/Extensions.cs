@@ -79,10 +79,18 @@ public static class Extensions
         using var memoryStream = new MemoryStream();
         stream.CopyTo(memoryStream);
         return memoryStream.ToArray();
-    }    
+    }
 
-    public static Stream ToStream(this byte[] byteArray) => 
+    public static Stream ToStream(this byte[] byteArray) =>
         new MemoryStream(byteArray);
+
+    public static bool None<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+    {
+        if (source.IsNull()) return true;
+        return predicate.IsNull()
+            ? !source.Any()
+            : !source.Any(predicate);
+    }
 
     private static (string selfAsString, string toCompareAsString) ConvertToJson<T>(T self, T toCompare) =>
         (Serialize(self), Serialize(toCompare));
