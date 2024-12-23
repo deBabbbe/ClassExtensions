@@ -84,10 +84,10 @@ public static class Extensions
     public static Stream ToStream(this byte[] byteArray) =>
         new MemoryStream(byteArray);
 
-    public static bool None<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+    public static bool None<T>(this IEnumerable<T> source, Func<T, bool>? predicate = null)
     {
         if (source.IsNull()) return true;
-        return predicate.IsNull()
+        return predicate == null
             ? !source.Any()
             : !source.Any(predicate);
     }
