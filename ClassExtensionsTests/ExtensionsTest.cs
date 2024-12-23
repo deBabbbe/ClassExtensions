@@ -386,7 +386,7 @@ public class ExtensionsTest
     public void ToByteArrayTest()
     {
         var expected = new byte[] { 1, 2, 3, 4, 5 };
-        var stream = new MemoryStream(expected);
+        using var stream = new MemoryStream(expected);
 
         var result = stream.ToByteArray();
 
@@ -397,10 +397,11 @@ public class ExtensionsTest
     public void ToStreamTest()
     {
         var expected = new byte[] { 1, 2, 3, 4, 5 };
-        var stream = new MemoryStream(expected);
+        using var stream = new MemoryStream(expected);
 
-        var result = expected.ToStream();
+        using var result = expected.ToStream();
 
+        Assert.That(result , Is.Not.Null);
         Assert.That((result as MemoryStream).ToArray(), Is.EqualTo(stream.ToArray()));
     }
 
