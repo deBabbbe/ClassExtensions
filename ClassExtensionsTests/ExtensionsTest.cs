@@ -1,6 +1,7 @@
 using System.Collections;
 using AutoFixture;
 using ClassExtensions;
+using NUnit.Framework;
 using TestHelper;
 using static System.Text.Json.JsonSerializer;
 
@@ -490,6 +491,7 @@ public class ExtensionsTest
         Assert.That(list, Contains.Item(resultB));
         Assert.That(resultA, Is.Not.EqualTo(resultB));
     }
+
     [Test]
     public void AnyOneTest_String()
     {
