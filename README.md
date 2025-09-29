@@ -1,82 +1,64 @@
+# 🚀 ClassExtensions for C#
+
 [![.NET Core Desktop](https://github.com/deBabbbe/ClassExtensions/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/deBabbbe/ClassExtensions/actions/workflows/dotnet-desktop.yml)
 [![CodeQL](https://github.com/deBabbbe/ClassExtensions/actions/workflows/codeql.yml/badge.svg)](https://github.com/deBabbbe/ClassExtensions/actions/workflows/codeql.yml)
 [![Codacy Security Scan](https://github.com/deBabbbe/ClassExtensions/actions/workflows/codacy.yml/badge.svg)](https://github.com/deBabbbe/ClassExtensions/actions/workflows/codacy.yml)
 [![SecurityCodeScan](https://github.com/deBabbbe/ClassExtensions/actions/workflows/securitycodescan.yml/badge.svg)](https://github.com/deBabbbe/ClassExtensions/actions/workflows/securitycodescan.yml)
 
-# Extensions for C# classes
+A set of **handy C# extension methods** for objects, collections, strings, and streams to make your code **cleaner and more expressive**.
 
-### bool IsNull(this object)
+---
 
-Returns true, if the passed object is null, otherwise false
+## 🟢 Null Checks
 
-### bool IsNotNull(this object)
+- `bool IsNull(this object obj)`  
+  ✅ Returns `true` if the object is `null`.
 
-Returns true, if the passed object is not null, otherwise false
+- `bool IsNotNull(this object obj)`  
+  ✅ Returns `true` if the object is **not null**.
 
-### void ForAll(this IEnumerable<T> source, Action<T> action)
+---
 
-Executes action for each element. No exception, if enumeration or action is null
+## 📦 Collection Utilities
 
-### void Times(this int count, Action<int> action)
+- `void ForAll(this IEnumerable<T> source, Action<T> action)`  
+  Executes `action` for each element. Safe if `null`.
 
-Executes action n times. No exception, if action is null
+- `void Times(this int count, Action<int> action)`  
+  Executes `action` `count` times. Safe if `null`.
 
-### void EqualJsonCheck(this object, object toCompare)
+- `bool IsEmpty(this IEnumerable value)` – Checks if empty  
+- `bool IsNotEmpty(this IEnumerable value)` – Checks if not empty  
+- `bool IsNullOrEmpty(this IEnumerable value)` – Checks null or empty  
+- `bool IsNotNullOrEmpty(this IEnumerable value)` – Checks not null and not empty
 
-Compares two objects by serializing them to json string and throws exception if not
+- `T Pop<T>(this IList<T> source)` – Returns **last element** and removes it  
+- `T Shift<T>(this IList<T> source)` – Returns **first element** and removes it  
+- `void Unshift<T>(this IList<T> source, T toAdd)` – Adds element at **first position**  
 
-### bool IsEqualJson(this object, object toCompare)
+- `T AnyOne<T>(this IEnumerable<T> source)` – Returns **any element** (throws if null/empty)  
+- `bool None<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)` – Checks if **no elements match** the predicate  
 
-Compares two objects by serializing them to json string and returns bool
+---
 
-### string ExpEnv(this string)
+## 🔍 Object Comparison
 
-Shortcut for Environment.ExpandEnvironmentVariables
+- `void EqualJsonCheck(this object obj, object toCompare)`  
+  Compares objects via **JSON serialization** and throws if unequal.
 
-### bool IsEmpty(this IEnumerable value)
+- `bool IsEqualJson(this object obj, object toCompare)`  
+  Returns `true` if objects are equal via JSON.
 
-Checks if a IEnumerable is empty
+---
 
-### bool IsNotEmpty(this IEnumerable value)
+## ✏️ String Utilities
 
-Checks if a IEnumerable is not empty
+- `string ExpEnv(this string text)` – Shortcut for `Environment.ExpandEnvironmentVariables`  
+- `string UseFormat(this string text, params string[] @params)` – Uses `string.Format` for placeholders
 
-### bool IsNullOrEmpty(this IEnumerable value)
+---
 
-Checks if a IEnumerable is null or empty
+## 📄 Stream & Byte Array
 
-### bool IsNotNullOrEmpty(this IEnumerable value)
-
-Checks if a IEnumerable is not null or empty
-
-### string UseFormat(this string text, params string[] @params)
-
-Uses string.Format to replace placeholder values
-
-### T Pop\<T\>(this IList\<T\> source)
-
-Returns the last element of the list and removes it from the list
-
-### T Shift\<T\>(this IList\<T\> source)
-
-Returns the first element of the list and removes it from the list
-
-### void Unshift\<T\>(this IList\<T\> source, T toAdd)
-
-Adds toAdd at the first position of source
-
-### byte[] ToByteArray(this Stream stream)
-
-Retruns a byte[] from a stream
-
-### Stream ToStream(this byte[] byteArray)
-
-Retruns a stream from a byte[]
-
-### bool None<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
-
-Equivalent to !source.Any(predicate) / !source.Any()
-
-### T AnyOne<T>(this IEnumerable<T> source)
-
-Returns any element from the the list, or throws ArgumentNullException if list is null or empty
+- `byte[] ToByteArray(this Stream stream)` – Converts a **Stream** to a **byte array**  
+- `Stream ToStream(this byte[] byteArray)` – Converts a **byte array** to a **Stream**
