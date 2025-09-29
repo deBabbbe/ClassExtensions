@@ -160,7 +160,7 @@ public class ExtensionsTest
 
         var exception = Assert.Throws<Exception>(() => a.EqualJsonCheck(b));
         Assert.That(exception.Message, Contains.Substring(expected));
-        Assert.That(_stringWriter.ToString(), Is.EqualTo($"{Serialize(a)} not equal to {Serialize(b)}\r\n"));
+        Assert.That(_stringWriter.ToString(), Is.EqualTo($"{Serialize(a)} not equal to {Serialize(b)}{Environment.NewLine}"));
     }
 
     [Test]
