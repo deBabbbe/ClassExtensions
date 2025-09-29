@@ -74,4 +74,9 @@ Retruns a byte[] from a stream
 Retruns a stream from a byte[]
 
 ### bool None<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+
 Equivalent to !source.Any(predicate) / !source.Any()
+
+### T AnyOne<T>(this IEnumerable<T> source)
+
+Returns any element from the the list, or throws ArgumentNullException if list is null or empty

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Security.Cryptography;
 using static System.Text.Json.JsonSerializer;
 
 namespace ClassExtensions;
@@ -90,6 +91,14 @@ public static class Extensions
         return predicate == null
             ? !source.Any()
             : !source.Any(predicate);
+    }
+
+    public static T AnyOne<T>(this IEnumerable<T> source)
+    {
+        if (source.IsNullOrEmpty()) throw new ArgumentNullException(nameof(source));
+
+        int index = RandomNumberGenerator.GetInt32(source.Count());
+        return source.ElementAt(index);
     }
 
     private static (string selfAsString, string toCompareAsString) ConvertToJson<T>(T self, T toCompare) =>

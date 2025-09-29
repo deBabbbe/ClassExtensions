@@ -1,4 +1,5 @@
 using System.Collections;
+using AutoFixture;
 using ClassExtensions;
 using TestHelper;
 using static System.Text.Json.JsonSerializer;
@@ -459,5 +460,49 @@ public class ExtensionsTest
     {
         List<int> list = null;
         Assert.That(list!.None(), Is.True);
+    }
+
+    [Test]
+    public void AnyOneTest_NullThrowsException()
+    {
+        List<int> list = null;
+        Assert.Throws<ArgumentNullException>(() => list!.AnyOne());
+    }
+
+    [Test]
+    public void AnyOneTest_EmptyThrows()
+    {
+        var list = new List<int>();
+        Assert.Throws<ArgumentNullException>(() => list!.AnyOne());
+    }
+
+    [Test]
+    public void AnyOneTest_Int()
+    {
+        var list = Enumerable.Range(1, 10000).ToList();
+
+        var resultA = list.AnyOne();
+
+        Assert.That(list, Contains.Item(resultA));
+
+        var resultB = list.AnyOne();
+
+        Assert.That(list, Contains.Item(resultB));
+        Assert.That(resultA, Is.Not.EqualTo(resultB));
+    }
+    [Test]
+    public void AnyOneTest_String()
+    {
+        var fixture = new Fixture();
+        var list = fixture.CreateMany<string>(100).ToList();
+
+        var resultA = list.AnyOne();
+
+        Assert.That(list, Contains.Item(resultA));
+
+        var resultB = list.AnyOne();
+
+        Assert.That(list, Contains.Item(resultB));
+        Assert.That(resultA, Is.Not.EqualTo(resultB));
     }
 }
