@@ -5,13 +5,11 @@ using NUnit.Framework;
 using TestHelper;
 using static System.Text.Json.JsonSerializer;
 
-namespace ClassExtensionsTest;
+namespace ClassExtensionsTests;
 
 public class ExtensionsTest
 {
-    private StringWriter _stringWriter;
-
-    public ExtensionsTest() => _stringWriter = new StringWriter();
+    private readonly StringWriter _stringWriter = new();
 
     [OneTimeSetUp]
     public void SetUp() => Console.SetOut(_stringWriter);

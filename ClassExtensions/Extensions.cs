@@ -6,7 +6,7 @@ namespace ClassExtensions;
 
 public static class Extensions
 {
-    public static bool IsNull(this object @object) => @object == null;
+    public static bool IsNull(this object? @object) => @object == null;
 
     public static bool IsNotNull(this object @object) => !@object.IsNull();
 
@@ -55,7 +55,7 @@ public static class Extensions
     public static bool IsNotNullOrEmpty(this IEnumerable value) =>
         !value.IsNullOrEmpty();
 
-    public static string UseFormat(this string text, params string[] @params) =>
+    public static string UseFormat(this string text, params object?[] @params) =>
         string.Format(text, @params);
 
     public static T Pop<T>(this IList<T> source)
